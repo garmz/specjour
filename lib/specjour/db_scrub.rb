@@ -4,6 +4,7 @@ module Specjour
     begin
       require 'rake'
       if defined?(Rails) && Rails.version =~ /^3/
+        Rake::Task.define_task(:environment) { }
         load 'rails/tasks/misc.rake'
         load 'active_record/railties/databases.rake'
       else
