@@ -29,9 +29,9 @@ module Specjour
   autoload :Cucumber, 'specjour/cucumber'
   autoload :RSpec, 'specjour/rspec'
 
-  VERSION ||= "0.5.2"
-  HOOKS_PATH ||= "./.specjour/hooks.rb"
-  PROGRAM_NAME ||= $PROGRAM_NAME # keep a reference of the original program name
+  VERSION = "0.5.2"
+  HOOKS_PATH = "./.specjour/hooks.rb"
+  PROGRAM_NAME = $PROGRAM_NAME # keep a reference of the original program name
 
   GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
 
