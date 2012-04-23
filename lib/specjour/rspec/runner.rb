@@ -1,6 +1,7 @@
 module Specjour::RSpec::Runner
   ::RSpec::Core::Runner::AT_EXIT_HOOK_BACKTRACE_LINE.replace "#{__FILE__}:#{__LINE__ + 3}:in `run'"
   def self.run(spec, output)
+    shared_example_groups = ::RSpec.world.shared_example_groups.clone
     args = ['--format=Specjour::RSpec::DistributedFormatter', spec]
     ::RSpec::Core::Runner.run args, $stderr, output
   ensure
@@ -8,6 +9,7 @@ module Specjour::RSpec::Runner
     ::RSpec.world.filtered_examples.clear
     ::RSpec.world.inclusion_filter.clear
     ::RSpec.world.exclusion_filter.clear
-    ::RSpec.world.send(:instance_variable_set, :@line_numbers, nil)
+    ::RSpec.world.send :instance_variable_set, :@shared_example_groups, shared_example_groups
+    ::RSpec.world.send :instance_variable_set, :@line_numbers, nil
   end
 end
